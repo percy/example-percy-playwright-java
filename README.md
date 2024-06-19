@@ -22,6 +22,7 @@ Minimum required `@percy/cli`  version is `1.28.8-beta.3` for this to work corre
 $ git clone git@github.com:percy/example-percy-playwright-java
 $ cd example-percy-playwright-java
 $ mvn compile
+$ npm install
 ```
 
 This tutorial specifically uses Browserstack Automate to run playwright test.
