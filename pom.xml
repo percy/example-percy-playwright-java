@@ -12,7 +12,7 @@
         <maven.compiler.source>20</maven.compiler.source>
         <maven.compiler.target>20</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <testng.version>7.4.0</testng.version>
+        <testng.version>7.5.1</testng.version>
         <junit.jupiter.version>5.9.2</junit.jupiter.version>
         <surefire.version>2.19.1</surefire.version>
         <config.file>config/automate-percy-test.testng.xml</config.file>
