@@ -7,7 +7,7 @@ The tutorial assumes you're already familiar with Java and Playwright and focuse
 
 ### Prerequisites
 
-TestNG v6.8+, Java v8+, Playwright v1.27+
+TestNG v7.11+, Java v8+, Playwright v1.55+
 
 If you are using CLI for running tests, ensure that Maven is installed on your machine, its environment variables are set, and its bin is added to system path, $PATH
 
@@ -16,7 +16,7 @@ If you are using CLI for running tests, ensure that Maven is installed on your m
 
 Clone the example application and install dependencies:
 
-Minimum required `@percy/cli`  version is `1.28.8-beta.3` for this to work correctly. If you already have `@percy/cli` or `@percy/webdriver-utils` installed please update it to latest or minium required version.
+Minimum required `@percy/cli` version is `1.31.2` for this to work correctly. If you already have `@percy/cli` or `@percy/webdriver-utils` installed please update it to latest or minimum required version.
 
 ```bash
 $ git clone git@github.com:percy/example-percy-playwright-java
