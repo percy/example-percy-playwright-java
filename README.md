@@ -1,13 +1,13 @@
 # example-percy-playwright-java
 Example demonstrating Percy's Java Playwright integration.
 
-## Java on Automate Playwright Tutorial
+## Java Playwright Tutorial
 
 The tutorial assumes you're already familiar with Java and Playwright and focuses on using it with Percy. You'll still be able to follow along if you're not familiar with Java, Playwright, but we won't spend time introducing Java, Playwright concepts.
 
 ### Prerequisites
 
-TestNG v7.11+, Java v8+, Playwright v1.55+
+TestNG v7.11+, Java v20+, Playwright v1.55+
 
 If you are using CLI for running tests, ensure that Maven is installed on your machine, its environment variables are set, and its bin is added to system path, $PATH
 
@@ -23,11 +23,14 @@ $ git clone git@github.com:percy/example-percy-playwright-java
 $ cd example-percy-playwright-java
 $ mvn compile
 $ npm install
+$ npx playwright install
 ```
 
-This tutorial specifically uses Browserstack Automate to run playwright test.
+This repo has examples for both **Percy Web** and **Percy on Automate**.
 
-For automate you will need credentials so refer to following instructions to get the same
+**Note:** For Percy Web, a local browser is used. You don't need the BrowserStack Automate setup for this. You can skip straight to Step 2.
+
+For Percy on Automate, you will need BrowserStack credentials. Refer to following instructions to get the same.
 
 1. You will need a BrowserStack `username` and `access key`. To obtain your access credentials, [sign up](https://www.browserstack.com/users/sign_up?utm_campaign=Search-Brand-India&utm_source=google&utm_medium=cpc&utm_content=609922405128&utm_term=browserstack) for a free trial or [purchase a plan](https://www.browserstack.com/pricing).
 
@@ -35,17 +38,15 @@ For automate you will need credentials so refer to following instructions to get
 
 ### Step 2
 
-Sign in to Percy and create a new **Automate** project under **Web** category. You can name the project "test-project" if you'd like. After you've created the project, you'll be shown a token environment variable.
+Sign in to Percy and create a new project. You can name the project "test-project" if you'd like. After you've created the project, you'll be shown a token environment variable.
+
+**Note:** For Percy Web, create a **Web** project. The token will start with ***web_*** keyword.
+
+**Note:** For Percy on Automate, create an **Automate** project under **Web** category. The token will start with ***auto_*** keyword.
 
 ### Step 3
 
-In the shell window you're working in, export the token and other environment variable:
-
-**PERCY_TOKEN** is used by percy to identify the project and create the builds.
-
-**Note:** In case of automate projects, token will start with ***auto_*** keyword.
-
-**Note:** In case of web projects, token will start with ***web_*** keyword.
+In the shell window you're working in, export the token and other environment variables:
 
 **Unix**
 
@@ -74,29 +75,25 @@ $ export BROWSERSTACK_ACCESS_KEY="<your browserstack access_key>"
 **Windows**
 
 ``` shell
-$ set BROWSERSTACK_USERNAME="<your browserstack access_key>"
+$ set BROWSERSTACK_USERNAME="<your browserstack user_name>"
 $ set BROWSERSTACK_ACCESS_KEY="<your browserstack access_key>"
 
 # PowerShell
-$ $Env:BROWSERSTACK_USERNAME="<your browserstack access_key>"
+$ $Env:BROWSERSTACK_USERNAME="<your browserstack user_name>"
 $ $Env:BROWSERSTACK_ACCESS_KEY="<your browserstack access_key>"
 ```
 
-Alternatively you can also update `USER_NAME`, `ACCESS_KEY` with Browserstack User name, Access key in the script as well.
+Alternatively you can also update `USERNAME`, `AUTOMATE_KEY` with Browserstack User name, Access key in the script as well.
 
-### Step 4
+### Step 4: Generate first Percy build (baseline)
 
-Considering all the above steps are done, we will run our tests, which will create web/automate session as well as percy build.
+Run the tests to create your first Percy build. This serves as the baseline for visual comparisons.
 
 #### For Percy Web
-**Note:** In case of web we are using local browser feel free to update them as per you requirement. You don't need automate setup for the same.
 
 ``` shell
 $ npx percy exec --verbose  --  mvn test -P web-percy-test
 ```
-
-Your **First Percy Web** build is created.
-On completion of the script, you would be able to see the your percy build. Since we ran for the first time, we would see these are new screenshots and hence there would be no comparisons.
 
 #### For Percy on Automate
 
@@ -104,19 +101,11 @@ On completion of the script, you would be able to see the your percy build. Sinc
 $ npx percy exec --verbose  --  mvn test -P automate-percy-test
 ```
 
-Your **First Percy on Automate** build is created.
-On completion of the script, you would be able to see the your percy build. Since we ran for the first time, we would see these are new screenshots and hence there would be no comparisons.
+Since this is the first build, all snapshots will be new and there will be no comparisons yet.
 
-### Step 5
+### Step 5: Generate second Percy build (with visual changes)
 
-Go to Percy Dashboard and ensure that your base build is approved.
-Now in order to make comparisons happen we need to make changes to the existing website so that a visual change can occur you can go to following file in `PercyTest.java`
-
-```java
-page.click("//*[@id=\"1\"]/div[4]"); // Say change id to 3
-```
-
-Or else just run `PercyAfterTest.java`, we have already made visual changes in this script. If you run the `PercyAfterTest.java` script in tests, this would create few visual changes and would get compared to the last build and we would be able to see few diffs.
+Run the "after" tests which contain pre-made visual changes (selects a Samsung product instead of Apple). This build will be compared against the baseline to surface visual diffs.
 
 #### For Percy Web
 
@@ -130,7 +119,7 @@ $ npx percy exec --verbose  --  mvn test -P web-percy-after-test
 $ npx percy exec --verbose  --  mvn test -P automate-percy-after-test
 ```
 
-On completion of this script, this build would get compared to the previous build and hence we can see the visual changes which percy detected.
+On completion, visit your Percy dashboard to see the visual changes detected between the two builds.
 
 ### Finished! 😀
 
