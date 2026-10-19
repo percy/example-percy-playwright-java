@@ -33,12 +33,12 @@
         <dependency>
             <groupId>com.microsoft.playwright</groupId>
             <artifactId>playwright</artifactId>
-            <version>1.55.0</version>
+            <version>1.63.0</version>
         </dependency>
         <dependency>
             <groupId>io.percy</groupId>
             <artifactId>percy-playwright-java</artifactId>
-            <version>1.0.1</version>
+            <version>1.2.1</version>
         </dependency>
         <dependency>
             <groupId>com.browserstack</groupId>
@@ -53,6 +53,15 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${surefire.version}</version>
+                <!-- junit-jupiter-api on the classpath makes surefire pick the JUnit Platform
+                     provider, which ignores suiteXmlFiles and runs 0 tests. -->
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.maven.surefire</groupId>
+                        <artifactId>surefire-testng</artifactId>
+                        <version>${surefire.version}</version>
+                    </dependency>
+                </dependencies>
                 <configuration>
                     <suiteXmlFiles>
                         <suiteXmlFile>${config.file}</suiteXmlFile>
