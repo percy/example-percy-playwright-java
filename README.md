@@ -7,7 +7,7 @@ The tutorial assumes you're already familiar with Java and Playwright and focuse
 
 ### Prerequisites
 
-TestNG v7.11+, Java v8+, Playwright v1.55+
+TestNG v7.11+, Java v8+, Playwright v1.63+
 
 If you are using CLI for running tests, ensure that Maven is installed on your machine, its environment variables are set, and its bin is added to system path, $PATH
 
